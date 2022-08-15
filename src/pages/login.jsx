@@ -3,9 +3,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
-// import Form from "../components/Form";
-// import Header from "../components/Header";
-// import formSchema from "../validators/loginUser";
+import Form from "../components/Form";
+import Header from "../components/Header";
+import formSchema from "../validators/loginUser";
 
 function Login({ setUser }) {
   const navigate = useNavigate();

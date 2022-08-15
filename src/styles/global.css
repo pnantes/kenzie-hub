@@ -1,4 +1,4 @@
-@import "./styles/fonts.css";
+@import "./fonts.css";
 
 * {
   box-sizing: border-box;
@@ -44,9 +44,9 @@ input {
   margin: 0 auto;
   padding: 0.8rem;
 }
-.container.small {
+/* .container.small {
   max-width: 1200px;
 }
 .container.big {
   max-width: 1320px;
-}
+} */
