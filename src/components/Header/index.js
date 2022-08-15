@@ -5,6 +5,20 @@ export const Header = styled.header`
   display: flex;
   padding: 1rem 0;
   width: 100%;
+
+  ${(props) => {
+    switch (props.pageName) {
+      case "login":
+        return css`
+          margin: 0 auto;
+          width: 50%;
+          justify-content: center;
+        `;
+      default:
+        return false;
+    }
+  }}
+
   & > div {
     display: flex;
     align-items: center;
@@ -12,27 +26,10 @@ export const Header = styled.header`
     flex-direction: row;
     padding: 1rem;
     gap: 2rem;
-    max-width: 300px;
+    max-width: 30%;
 
     margin: 0 auto;
     width: 100%;
-    /* ${(props) => {
-      switch (props.pageName) {
-        case "login":
-          return css`
-            margin: 0 auto;
-            width: 100%;
-            justify-content: center;
-          `;
-        case "register":
-          return css`
-            margin: 0 auto;
-            width: 100%;
-          `;
-        default:
-          return false;
-      }
-    }} */
   }
 
   button {
@@ -62,6 +59,13 @@ export const Header = styled.header`
       gap: 1rem;
     }
   }
+`;
+
+export const ContainerCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
 `;
 
 export const Nav = styled.nav`

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Logo from "../assets/register.svg";
 
-import Form from "../components/Form";
 import { Header } from "../components/Header";
+import { SubTitle, LargeButton, Form, TitleForm } from "../components/Form";
 import formSchema from "../validators/registerUser";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -65,9 +65,10 @@ function Register() {
         </div>
       </Header>
       <div className="container">
-        <h2>Crie sua conta</h2>
-        <h4>Rapido e grátis, vamos nessa</h4>
-        <Form className="form" onSubmit={handleSubmit(registerUser)}>
+        <TitleForm>Crie sua conta</TitleForm>
+        <SubTitle>Rapido e grátis, vamos nessa</SubTitle>
+
+        <Form onSubmit={handleSubmit(registerUser)}>
           <label htmlFor="name">Nome</label>
           <input
             type="text"
@@ -137,9 +138,12 @@ function Register() {
               Quarto Módulo
             </option>
           </select>
-          <button type="submit">Cadastrar</button>
+          <LargeButton buttonStyle={"sign"} type="submit">
+            Cadastrar
+          </LargeButton>
         </Form>
       </div>
+
       <ToastContainer
         position="top-right"
         autoClose={5000}

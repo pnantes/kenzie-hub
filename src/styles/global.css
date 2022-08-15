@@ -39,13 +39,17 @@ input {
 }
 
 .container {
-  width: 100%;
-  max-width: 300px;
+  max-width: 30%;
   margin: 0 auto;
+  margin-bottom: 10%;
   padding: 0.8rem;
   background-color: #212529;
 }
 
 .dashboard {
   border-bottom: 1px solid #212529;
+}
+
+.header {
+  max-width: 30%;
 }

@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import Logo from "../assets/login.svg";
 
-import Form from "../components/Form";
-import { Header } from "../components/Header";
+import { Header, ContainerCenter } from "../components/Header";
+import { P, LargeButton, Form, TitleForm } from "../components/Form";
 import formSchema from "../validators/loginUser";
 
 function Login({ setUser }) {
@@ -35,13 +35,13 @@ function Login({ setUser }) {
 
   return (
     <main>
-      <Header>
-        <div className="header" pageName={"login"}>
+      <Header pageName={"login"}>
+        <div className="header">
           <img src={Logo} alt="Kenzie Hub Logo" />
         </div>
       </Header>
       <div className="container">
-        <h2>Login</h2>
+        <TitleForm> Login </TitleForm>
 
         <Form className="form" onSubmit={handleSubmit(loginUser)}>
           <label htmlFor="email">Email</label>
@@ -62,11 +62,17 @@ function Login({ setUser }) {
           />
           <span>{errors.password?.message}</span>
 
-          <button type="submit">Entrar</button>
+          <LargeButton buttonStyle={"login"} type="submit">
+            Entrar
+          </LargeButton>
         </Form>
 
-        <p>Ainda não possui uma conta?</p>
-        <button onClick={handleClick}>Cadastre-se</button>
+        <ContainerCenter>
+          <P>Ainda não possui uma conta?</P>
+          <LargeButton buttonStyle={"signup"} onClick={handleClick}>
+            Cadastre-se
+          </LargeButton>
+        </ContainerCenter>
       </div>
     </main>
   );
