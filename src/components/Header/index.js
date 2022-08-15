@@ -1,30 +1,56 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
-const Header = styled.header`
+export const Header = styled.header`
+  display: flex;
   padding: 1rem 0;
-  background: #001e32;
-  div {
+  width: 100%;
+  & > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
+    padding: 1rem;
+    gap: 2rem;
+    max-width: 300px;
+
+    margin: 0 auto;
+    width: 100%;
+    /* ${(props) => {
+      switch (props.pageName) {
+        case "login":
+          return css`
+            margin: 0 auto;
+            width: 100%;
+            justify-content: center;
+          `;
+        case "register":
+          return css`
+            margin: 0 auto;
+            width: 100%;
+          `;
+        default:
+          return false;
+      }
+    }} */
   }
-  h1 {
-    color: #fff;
-  }
+
   button {
-    font-family: Montserrat, sans-serif;
+    font-family: "Inter", sans-serif;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1rem;
 
-    background: transparent;
-    border: 2px solid #fff;
+    background: #212529;
+    border: none;
     color: #fff;
+    border-radius: 4px;
 
-    padding: 0 2rem;
-    height: 48px;
+    padding: 0 1rem;
+    height: 40px;
 
     transition: 0.3s;
   }
+
   button:hover {
     background: #fff;
     color: #001e32;
@@ -38,4 +64,25 @@ const Header = styled.header`
   }
 `;
 
-export default Header;
+export const Nav = styled.nav`
+  button {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+
+    background: #212529;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+
+    padding: 0 1rem;
+    height: 40px;
+
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #fff;
+    color: #001e32;
+  }
+`;

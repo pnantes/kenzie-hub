@@ -9,12 +9,12 @@ const RoutesMain = () => {
 
   return (
     <Routes>
+      <Route path="/registro" element={<Register />} />
       <Route path="/login" element={<Login setUser={setUser} />} />
       <Route
         path="/dashboard"
         element={<Dashboard user={user} setUser={setUser} />}
       />
-      <Route path="/registro" element={<Register />} />
     </Routes>
   );
 };

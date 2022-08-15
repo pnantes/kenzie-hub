@@ -11,13 +11,15 @@ const Form = styled.form`
     height: 25px;
     border-radius: 4px;
     border: none;
-    background-color: #121214;
-  }
-  input:hover {
     background-color: #343b41;
+    color: #868e96;
   }
+
   input:focus {
+    color: #f8f9fa;
+    border: 1px solid #f8f9fa;
   }
+
   button {
     width: 250px;
     height: 30px;

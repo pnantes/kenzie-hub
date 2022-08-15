@@ -2,9 +2,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import Logo from "../assets/register.svg";
 
 import Form from "../components/Form";
-import Header from "../components/Header";
+import { Header } from "../components/Header";
 import formSchema from "../validators/registerUser";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,7 +29,7 @@ function Register() {
           navigate("/login", { replace: true });
         }, 3000);
 
-        toast.success("Cadastro realizado com sucesso!", {
+        toast.success("Conta criada com sucesso!", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -58,8 +59,8 @@ function Register() {
   return (
     <main>
       <Header>
-        <div>
-          <h1>Kenzie Hub</h1>
+        <div className="header" pageName={"register"}>
+          <img src={Logo} alt="Kenzie Hub Logo" />
           <button onClick={handleClick}>Voltar</button>
         </div>
       </Header>

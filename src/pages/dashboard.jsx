@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 // import api from "../services/api";
 import { useState } from "react";
+import { Nav } from "../components/Header";
+import Logo from "../assets/dashboard.svg";
+import { Container } from "../components/Dashboard";
 
 function Dashboard({ user, setUser }) {
   const [loading, setLoading] = useState();
@@ -44,18 +47,26 @@ function Dashboard({ user, setUser }) {
   } else {
     return user ? (
       <body>
-        <nav>
-          <h1>Kenzie Hub</h1> <button onClick={handleClick}>Sair</button>
-        </nav>
-        <header>
-          <h1>Olá, {user?.name}</h1> <h5>{user?.course_module}</h5>
+        <Nav className="dashboard">
+          <Container>
+            <img src={Logo} alt="Kenzie Hub Logo" />{" "}
+            <button onClick={handleClick}>Sair</button>
+          </Container>
+        </Nav>
+        <header className="dashboard">
+          <Container>
+            <h1>Olá, {user?.name}</h1> <h5>{user?.course_module}</h5>
+          </Container>
         </header>
-        <main>
-          <h1>Que pena! Estamos em desenvolvimento</h1>
-          <p>
-            Nossa aplicação está em desenvolvimento, em breve teremos novidades
-          </p>
-        </main>
+        <Container>
+          <main>
+            <h1>Que pena! Estamos em desenvolvimento</h1>
+            <p>
+              Nossa aplicação está em desenvolvimento, em breve teremos
+              novidades
+            </p>
+          </main>
+        </Container>
       </body>
     ) : (
       <Navigate to="/login" replace />

@@ -2,9 +2,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import Logo from "../assets/login.svg";
 
 import Form from "../components/Form";
-import Header from "../components/Header";
+import { Header } from "../components/Header";
 import formSchema from "../validators/loginUser";
 
 function Login({ setUser }) {
@@ -35,7 +36,9 @@ function Login({ setUser }) {
   return (
     <main>
       <Header>
-        <h1>Kenzie Hub</h1>
+        <div className="header" pageName={"login"}>
+          <img src={Logo} alt="Kenzie Hub Logo" />
+        </div>
       </Header>
       <div className="container">
         <h2>Login</h2>
