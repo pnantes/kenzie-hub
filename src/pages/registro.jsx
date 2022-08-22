@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import api from "../services/api";
 import Logo from "../assets/register.svg";
 
+import formSchema from "../validators/registerUser";
 import { Header } from "../components/Header";
 import { SubTitle, LargeButton, Form, TitleForm } from "../components/Form";
-import formSchema from "../validators/registerUser";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { UserContext } from "../contexts/UserContext";
+import { ToastContainer } from "react-toastify";
 
 function Register() {
+  const { backToLogin, registerUser } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -19,49 +19,12 @@ function Register() {
     resolver: yupResolver(formSchema),
   });
 
-  const navigate = useNavigate();
-
-  function registerUser(data) {
-    api
-      .post("/users", data)
-      .then((response) => {
-        setTimeout(() => {
-          navigate("/login", { replace: true });
-        }, 3000);
-
-        toast.success("Conta criada com sucesso!", {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(`${err.response.data.message}`, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      });
-  }
-  function handleClick() {
-    navigate("/login", { replace: true });
-  }
-
   return (
     <main>
       <Header>
         <div className="header" pageName={"register"}>
           <img src={Logo} alt="Kenzie Hub Logo" />
-          <button onClick={handleClick}>Voltar</button>
+          <button onClick={backToLogin}>Voltar</button>
         </div>
       </Header>
       <div className="container">

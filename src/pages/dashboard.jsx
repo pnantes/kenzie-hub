@@ -1,52 +1,26 @@
-import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-// import api from "../services/api";
-import { useState } from "react";
-import { Nav } from "../components/Header";
 import Logo from "../assets/dashboard.svg";
+import AddTech from "../assets/addTech.svg";
+import { useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Nav } from "../components/Header";
 import { Container } from "../components/Dashboard";
+import { UserContext } from "../contexts/UserContext";
+import { AddModal } from "../components/AddModal";
 
-function Dashboard({ user, setUser }) {
-  const [loading, setLoading] = useState();
+function Dashboard() {
   const navigate = useNavigate();
+  const { user, loading } = useContext(UserContext);
 
   function handleClick() {
     localStorage.clear();
-    navigate("/login", { replace: true });
+    navigate("/", { replace: true });
   }
-
-  useEffect(() => {
-    async function loadUser() {
-      const token = localStorage.getItem("@TOKEN");
-
-      if (!token) {
-        navigate("/login", { replace: true });
-        localStorage.clear();
-
-        // try {
-        //   api
-        //     .get("/profile", {
-        //       headers: {
-        //         Authorization: `Bearer ${token}`,
-        //         "Content-Type": "application/json",
-        //       },
-        //     })
-        //     .then((res) => console.log(res.data));
-        //   setUser(data);
-        // } catch (error) {
-        //   console.error(error);
-        // }
-      }
-      setLoading(false);
-    }
-    loadUser();
-  }, []);
 
   if (loading) {
     return <div>Carregando...</div>;
   } else {
     return user ? (
-      <body>
+      <div className="body">
         <Nav className="dashboard">
           <Container>
             <img src={Logo} alt="Kenzie Hub Logo" />{" "}
@@ -60,14 +34,14 @@ function Dashboard({ user, setUser }) {
         </header>
         <Container>
           <main>
-            <h1>Que pena! Estamos em desenvolvimento</h1>
-            <p>
-              Nossa aplicação está em desenvolvimento, em breve teremos
-              novidades
-            </p>
+            <h1>Tecnologias</h1>
+            <figure>
+              <img src={AddTech} alt="Add Tech" />
+            </figure>
+            <AddModal />
           </main>
         </Container>
-      </body>
+      </div>
     ) : (
       <Navigate to="/login" replace />
     );

@@ -1,15 +1,15 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import api from "../services/api";
 import Logo from "../assets/login.svg";
 
+import { UserContext } from "../contexts/UserContext";
+import formSchema from "../validators/loginUser";
 import { Header, ContainerCenter } from "../components/Header";
 import { P, LargeButton, Form, TitleForm } from "../components/Form";
-import formSchema from "../validators/loginUser";
 
-function Login({ setUser }) {
-  const navigate = useNavigate();
+function Login() {
+  const { setUser, loginUser, backToRegister } = useContext(UserContext);
   const {
     register,
     handleSubmit,
@@ -17,21 +17,6 @@ function Login({ setUser }) {
   } = useForm({
     resolver: yupResolver(formSchema),
   });
-
-  function loginUser(data) {
-    api
-      .post("/sessions", data)
-      .then((response) => {
-        setUser(response.data.user);
-        localStorage.setItem("@TOKEN", JSON.stringify(response.data.token));
-        navigate("/dashboard", { replace: true });
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function handleClick() {
-    navigate("/registro", { replace: true });
-  }
 
   return (
     <main>
@@ -69,7 +54,7 @@ function Login({ setUser }) {
 
         <ContainerCenter>
           <P>Ainda não possui uma conta?</P>
-          <LargeButton buttonStyle={"signup"} onClick={handleClick}>
+          <LargeButton buttonStyle={"signup"} onClick={backToRegister}>
             Cadastre-se
           </LargeButton>
         </ContainerCenter>
