@@ -1,15 +1,22 @@
 import Logo from "../assets/dashboard.svg";
 import AddTech from "../assets/addTech.svg";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Nav } from "../components/Header";
 import { Container } from "../components/Dashboard";
 import { UserContext } from "../contexts/UserContext";
 import { AddModal } from "../components/AddModal";
+import { TechContext } from "../contexts/TechContext";
+import { TechList } from "../components/TechList";
 
 function Dashboard() {
   const navigate = useNavigate();
   const { user, loading } = useContext(UserContext);
+  const { tech, getTech } = useContext(TechContext);
+
+  useEffect(() => {
+    getTech();
+  }, []);
 
   function handleClick() {
     localStorage.clear();
@@ -38,9 +45,10 @@ function Dashboard() {
             <figure>
               <img src={AddTech} alt="Add Tech" />
             </figure>
-            <AddModal />
+            <TechList />
           </main>
         </Container>
+        <AddModal />
       </div>
     ) : (
       <Navigate to="/login" replace />

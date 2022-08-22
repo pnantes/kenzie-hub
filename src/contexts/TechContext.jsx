@@ -9,10 +9,15 @@ export const TechProvider = ({ children }) => {
   const { user } = useContext(UserContext);
 
   async function createTech(formData) {
-    try {
-      const response = await api.post("users/techs", formData);
+    const token = localStorage.getItem("@TOKEN");
 
-      console.log(response.data);
+    try {
+      const response = await api.post("users/techs", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
       setTech([...tech, formData]);
     } catch (error) {
@@ -21,36 +26,42 @@ export const TechProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
+  async function getTech() {
     const token = localStorage.getItem("@TOKEN");
-
-    async function getTech() {
-      if (token) {
-        try {
-          const response = await api.get("profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          });
-          setTech(response.data.techs);
-        } catch (error) {
-          console.log(error.response.data.message);
-        }
+    if (token) {
+      try {
+        const response = await api.get("profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(response.data.techs);
+        setTech(response.data.techs);
+      } catch (error) {
+        console.log(error.response.data.message);
       }
     }
-    if (user && token) {
-      getTech();
-    } else {
-      setTech([]);
+  }
+
+  async function removeTech(id) {
+    try {
+      const response = await api.delete(`users/techs/:${id}`);
+      console.log("item excluido");
+      const newList = tech.filter((techItem) => techItem.id !== id);
+      setTech(newList);
+    } catch (error) {
+      console.log(error.response.data.error);
     }
-  }, [user]);
+  }
 
   return (
     <TechContext.Provider
       value={{
         tech,
         createTech,
+        getTech,
+        removeTech,
       }}
     >
       {children}
