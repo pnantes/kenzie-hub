@@ -36,7 +36,6 @@ export const TechProvider = ({ children }) => {
             "Content-Type": "application/json",
           },
         });
-        console.log(response.data.techs);
         setTech(response.data.techs);
       } catch (error) {
         console.log(error.response.data.message);

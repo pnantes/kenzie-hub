@@ -90,6 +90,8 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
           console.error(error);
         }
+      } else {
+        navigate("/");
       }
       setLoading(false);
     }
