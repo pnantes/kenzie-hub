@@ -45,12 +45,19 @@ export const TechProvider = ({ children }) => {
 
   async function removeTech(id) {
     try {
-      const response = await api.delete(`users/techs/:${id}`);
+      const token = localStorage.getItem("@TOKEN");
+      const response = await api.delete(`users/techs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       console.log("item excluido");
+
       const newList = tech.filter((techItem) => techItem.id !== id);
       setTech(newList);
     } catch (error) {
-      console.log(error.response.data.error);
+      console.log(error.message);
     }
   }
 

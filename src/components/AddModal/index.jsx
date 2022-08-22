@@ -36,7 +36,7 @@ export const AddModal = () => {
         <label htmlFor="status">Selecionar status</label>
         <select id="status" {...register("status")}>
           <option value="Iniciante">Iniciante</option>
-          <option value="Intermediario">Intermediário</option>
+          <option value="Intermediário">Intermediário</option>
           <option value="Avançado">Avançado</option>
         </select>
 
