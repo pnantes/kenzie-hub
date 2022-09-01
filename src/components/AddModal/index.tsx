@@ -4,7 +4,7 @@ import { LargeButton, TitleForm } from "../Form";
 import { Form } from "../Form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
-import { TechContext } from "../../contexts/TechContext";
+import { ITech, TechContext } from "../../contexts/TechContext";
 
 export const AddModal = () => {
   const { createTech } = useContext(TechContext);
@@ -13,7 +13,7 @@ export const AddModal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ITech>({
     resolver: yupResolver(formSchema),
   });
 

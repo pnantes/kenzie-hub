@@ -8,7 +8,6 @@ const ProtectedRoutes = () => {
 
   useEffect(() => {
     if (!user) {
-      console.log(user);
       navigate("/");
     }
   }, []);

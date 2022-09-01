@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Logo from "../assets/register.svg";
-
 import formSchema from "../validators/registerUser";
 import { Header } from "../components/Header";
 import { SubTitle, LargeButton, Form, TitleForm } from "../components/Form";
-import { UserContext } from "../contexts/UserContext";
+import { IRegisterUser, UserContext } from "../contexts/UserContext";
 import { ToastContainer } from "react-toastify";
+
+const logo = require("../assets/register.svg") as string;
 
 function Register() {
   const { backToLogin, registerUser } = useContext(UserContext);
@@ -15,15 +15,15 @@ function Register() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IRegisterUser>({
     resolver: yupResolver(formSchema),
   });
 
   return (
     <main>
-      <Header>
-        <div className="header" pageName={"register"}>
-          <img src={Logo} alt="Kenzie Hub Logo" />
+      <Header pageName="register">
+        <div className="header">
+          <img src={logo} alt="Kenzie Hub Logo" />
           <button onClick={backToLogin}>Voltar</button>
         </div>
       </Header>
@@ -101,8 +101,8 @@ function Register() {
               Quarto Módulo
             </option>
           </select>
-          <LargeButton buttonStyle={"sign"} type="submit">
-            Cadastrar
+          <LargeButton buttonStyle="sign" type="submit">
+            {" "}
           </LargeButton>
         </Form>
       </div>

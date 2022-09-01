@@ -1,8 +1,13 @@
-import Bin from "../../../assets/bin.svg";
 import { useContext } from "react";
-import { TechContext } from "../../../contexts/TechContext";
+import { ITech, TechContext } from "../../../contexts/TechContext";
 
-export const TechCard = ({ techItem }) => {
+const Bin = require("../../../assets/bin.svg") as string;
+
+interface ITechCardProps {
+  techItem: ITech;
+}
+
+export const TechCard = ({ techItem }: ITechCardProps) => {
   const { removeTech } = useContext(TechContext);
   return (
     <div>

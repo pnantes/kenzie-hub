@@ -70,7 +70,9 @@ export const SubTitle = styled.h4`
   align-items: center;
 `;
 
-export const LargeButton = styled.button`
+export const LargeButton = styled.button<{
+  buttonStyle: string;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;

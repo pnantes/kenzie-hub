@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 
-export const Header = styled.header`
+export const Header = styled.header<{
+  pageName: string;
+}>`
   display: flex;
   padding: 1rem 0;
   width: 100%;

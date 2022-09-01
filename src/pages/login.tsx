@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Logo from "../assets/login.svg";
-
-import { UserContext } from "../contexts/UserContext";
+import { ILoginUser, UserContext } from "../contexts/UserContext";
 import formSchema from "../validators/loginUser";
 import { Header, ContainerCenter } from "../components/Header";
 import { P, LargeButton, Form, TitleForm } from "../components/Form";
+
+const logo = require("../assets/login.svg") as string;
 
 function Login() {
   const { setUser, loginUser, backToRegister } = useContext(UserContext);
@@ -14,15 +14,15 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ILoginUser>({
     resolver: yupResolver(formSchema),
   });
 
   return (
     <main>
-      <Header pageName={"login"}>
+      <Header pageName="login">
         <div className="header">
-          <img src={Logo} alt="Kenzie Hub Logo" />
+          <img src={logo} alt="Kenzie Hub Logo" />
         </div>
       </Header>
       <div className="container">

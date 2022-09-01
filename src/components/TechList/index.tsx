@@ -5,7 +5,11 @@ import { TechCard } from "./TechCard";
 export const TechList = () => {
   const { tech } = useContext(TechContext);
 
-  return tech.map((techItem) => (
-    <TechCard key={techItem.id} techItem={techItem} />
-  ));
+  return (
+    <>
+      {tech.map((techItem) => (
+        <TechCard key={techItem.id} techItem={techItem} />
+      ))}
+    </>
+  );
 };

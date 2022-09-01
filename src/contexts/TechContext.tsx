@@ -1,14 +1,41 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import api from "../services/api";
 import { UserContext } from "./UserContext";
+import { toast, ToastContainer } from "react-toastify";
+import { SubmitHandler } from "react-hook-form";
 
-export const TechContext = createContext({});
+interface ITechProviderProps {
+  children: ReactNode;
+}
 
-export const TechProvider = ({ children }) => {
-  const [tech, setTech] = useState([]);
+export interface ITech {
+  id: string;
+  title: string;
+  status: string;
+  created_at: Date;
+  updated_at: Date;
+}
+
+interface ITechContext {
+  tech: ITech[];
+  createTech: SubmitHandler<ITech>;
+  getTech: () => void;
+  removeTech: (id: string) => void;
+}
+
+export const TechContext = createContext({} as ITechContext);
+
+export const TechProvider = ({ children }: ITechProviderProps) => {
+  const [tech, setTech] = useState<ITech[]>([] as ITech[]);
   const { user } = useContext(UserContext);
 
-  async function createTech(formData) {
+  async function createTech(formData: ITech) {
     const token = localStorage.getItem("@TOKEN");
 
     try {
@@ -18,11 +45,10 @@ export const TechProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
       });
-
+      toast.success("Tech criada com sucesso");
       setTech([...tech, formData]);
-    } catch (error) {
-      console.log(formData);
-      console.log(error.response.data.message);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
     }
   }
 
@@ -37,13 +63,13 @@ export const TechProvider = ({ children }) => {
           },
         });
         setTech(response.data.techs);
-      } catch (error) {
-        console.log(error.response.data.message);
+      } catch (error: any) {
+        toast.error(error.response.data.message);
       }
     }
   }
 
-  async function removeTech(id) {
+  async function removeTech(id: string) {
     try {
       const token = localStorage.getItem("@TOKEN");
       const response = await api.delete(`users/techs/${id}`, {
@@ -52,12 +78,12 @@ export const TechProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
       });
-      console.log("item excluido");
+      toast.success("Tech excluída");
 
       const newList = tech.filter((techItem) => techItem.id !== id);
       setTech(newList);
-    } catch (error) {
-      console.log(error.message);
+    } catch (error: any) {
+      toast.error(error.message);
     }
   }
 

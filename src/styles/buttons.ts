@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 
-export const ThemeButton = styled.button`
+export const ThemeButton = styled.button<{
+  buttonSize: string;
+  buttonStyle: string;
+}>`
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 500;

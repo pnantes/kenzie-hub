@@ -1,5 +1,3 @@
-import Logo from "../assets/dashboard.svg";
-import AddTech from "../assets/addTech.svg";
 import { useContext, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Nav } from "../components/Header";
@@ -8,6 +6,9 @@ import { UserContext } from "../contexts/UserContext";
 import { AddModal } from "../components/AddModal";
 import { TechContext } from "../contexts/TechContext";
 import { TechList } from "../components/TechList";
+
+const Logo = require("../assets/dashboard.svg") as string;
+const AddTech = require("../assets/addTech.svg") as string;
 
 function Dashboard() {
   const navigate = useNavigate();
